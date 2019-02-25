@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Connect Four",
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "protocol": "inspector",
+      "console": "integratedTerminal",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch TicTacToe",
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "protocol": "inspector",
+      "console": "integratedTerminal",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Connect Four per VSS.com",
+      "program": "${workspaceFolder}/connect-four.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "console": "integratedTerminal",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+    }
+  ]
+}
