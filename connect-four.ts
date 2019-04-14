@@ -34,6 +34,48 @@ class ConnectFour {
     )
   }
 
+  private printRotatedBoard(): void {
+    const returnSpot = (input: string | undefined): string => {
+      return input === undefined ? ' ' : input;
+    }
+    console.log(
+        `
+        |${returnSpot(this.board[1][6])}|${returnSpot(this.board[2][6])}|${returnSpot(this.board[3][6])}|${returnSpot(this.board[4][6])}|${returnSpot(this.board[5][6])}|${returnSpot(this.board[6][6])}|
+        |${returnSpot(this.board[1][5])}|${returnSpot(this.board[2][5])}|${returnSpot(this.board[3][5])}|${returnSpot(this.board[4][5])}|${returnSpot(this.board[5][5])}|${returnSpot(this.board[6][5])}|
+        |${returnSpot(this.board[1][4])}|${returnSpot(this.board[2][4])}|${returnSpot(this.board[3][4])}|${returnSpot(this.board[4][4])}|${returnSpot(this.board[5][4])}|${returnSpot(this.board[6][4])}|
+        |${returnSpot(this.board[1][3])}|${returnSpot(this.board[2][3])}|${returnSpot(this.board[3][3])}|${returnSpot(this.board[4][3])}|${returnSpot(this.board[5][3])}|${returnSpot(this.board[6][3])}|
+        |${returnSpot(this.board[1][2])}|${returnSpot(this.board[2][2])}|${returnSpot(this.board[3][2])}|${returnSpot(this.board[4][2])}|${returnSpot(this.board[5][2])}|${returnSpot(this.board[6][2])}|
+        |${returnSpot(this.board[1][1])}|${returnSpot(this.board[2][1])}|${returnSpot(this.board[3][1])}|${returnSpot(this.board[4][1])}|${returnSpot(this.board[5][1])}|${returnSpot(this.board[6][1])}|
+        |${returnSpot(this.board[1][0])}|${returnSpot(this.board[2][0])}|${returnSpot(this.board[3][0])}|${returnSpot(this.board[4][0])}|${returnSpot(this.board[5][0])}|${returnSpot(this.board[6][0])}|
+        -------------
+        |1|2|3|4|5|6|
+        `
+    )
+  }
+
+  // Rotates board 90 degrees (only works once as it is now)
+  public rotateBoard(): void {
+    // Since the board isn't a square then there will now be 6 columns and 7 rows in the newly rotated board
+
+    const newBoard = {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    }
+
+    // col and row are iterating through the "old" board
+    for (let col = 7, newRow = 0; col >= 1; col--, newRow++) {
+      for (let row = 0, newCol = 1; row < 6; row++, newCol++) {
+        newBoard[newCol][newRow] = this.board[col][row];
+      }
+    }
+
+    this.board = newBoard;
+  }
+
   public playGame(): void {
     this.printBoard();
     console.log(`Enter a column player ${this.player}`);
@@ -89,6 +131,10 @@ class ConnectFour {
     const declareVictor = (input: string): void => {
       const victor: string = input === 'O' ? 'Player 1 (O)': 'Player 2 (X)';
       console.log(victor + ' wins!');
+      this.printBoard();
+      console.log('Rotated board: ');
+      this.rotateBoard();
+      this.printRotatedBoard();
     }
 
     for (let col = 1; col <= 7; col++) {
